@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="logup">
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
@@ -26,21 +26,30 @@
               type="password"
               placeholder="Enter your password"
               class="form-control"
-              v-validate="'required|min:6|max:16'"
+              v-validate="'required|min:6|max:16|confirmed:confirmpassword'"
               :class="{'input': true, 'is-danger': errors.has('password') }"
               v-model="password">
             </b-form-input>
-            <span
-              v-show="errors.has('password')"
-              class="help is-danger">{{ errors.first('password') }}
-            </span>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <label for="confirmpassword" class="control-label col-md-4">Confirm</label>
+          <div class="col-md-8">
+            <b-form-input
+              name="confirmpassword"
+              type="password"
+              class="form-control"
+              placeholder="Confirm Your Password.">
+            </b-form-input>
+            <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-md-4"></div>
           <div class="col-md-6">
-            <b-button v-on:click="signIn">Sign In</b-button>
+            <b-button v-on:click="addUser">Sign Up</b-button>
           </div>
         </div>
       </div>
@@ -50,21 +59,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'login',
-    data () {
-      return {
-        email: null,
-        password: '',
-        isLogin: false
+export default {
+  name: 'logup',
+  data () {
+    return {
+      email: null,
+      password: '',
+      users: []
+    }
+  },
+  methods: {
+    addUser: function () {
+      const user = {
+        email: this.email,
+        password: this.password
       }
-    },
-    methods: {
-      signIn: function () {
-        const email = this.email
-        const password = this.password
-        if (email === 'a@qq.com' && password === '123456') window.location = '/'
-      }
+      this.users.push(user)
     }
   }
+}
 </script>
