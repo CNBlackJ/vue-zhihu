@@ -8,6 +8,7 @@ import VeeValidate from 'vee-validate'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 
