@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import Logup from '@/components/Logup'
+import Navbar from '@/pages/Navbar'
+import Home from '@/pages/Home'
 
 Vue.use(Router)
 
@@ -22,6 +24,16 @@ export default new Router({
       path: '/logup',
       name: 'Logup',
       component: Logup
+    },
+    {
+      path: '/nav',
+      name: 'Navbar',
+      component: Navbar
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home
     }
   ]
 })
