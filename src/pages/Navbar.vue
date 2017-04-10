@@ -38,7 +38,7 @@
 
               <!-- Using text slot -->
               <template slot="text">
-                <img src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
+                <img slot="aside" src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
                 <span style="font-weight: bold;">User</span>
               </template>
 

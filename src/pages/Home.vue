@@ -5,6 +5,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <home-entry></home-entry>
+        <content-section></content-section>
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -14,6 +15,7 @@
 <script>
 import navbar from './Navbar'
 import homeEntry from './HomeEntry'
+import contentSection from './Content'
 
 export default {
   data () {
@@ -21,7 +23,8 @@ export default {
   },
   components: {
     navbar,
-    homeEntry
+    homeEntry,
+    contentSection
   }
 }
 </script>
