@@ -17,7 +17,8 @@
     "font-awesome": "^4.7.0",
     "vee-validate": "^2.0.0-beta.25",
     "vue": "^2.2.2",
-    "vue-router": "^2.2.0"
+    "vue-router": "^2.2.0",
+    "zhihu": "^1.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

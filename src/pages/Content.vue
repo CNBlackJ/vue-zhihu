@@ -14,22 +14,16 @@
     <div class="content-section">
       <b-media>
         <div class="row">
-          <div class="col-md-1">
+          <div class="col-md-1" style="padding: 0px">
             <div class="topic-avatar">
               <img class="avatar" slot="aside" src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
             </div>
-            <a v-on:click="addVote">
-              <div class="topic-vote">
-                <!-- <i class="fa fa-caret-up"></i> -->
-                <span>
-                  {{ vote }}
-                </span>
-              </div>
-            </a>
+
+            <vote :isShowAll=isShowAll></vote>
           </div>
 
-          <div class="topic-header row col-md-11">
-            <div class="col-md-12">
+          <div class="topic-header row col-md-11" style="padding: 0px">
+            <div class="col-md-12" style="padding: 0px">
               <div class="topic-from">
                 来自话题: IT 行业
                 <i class="pull-right fa fa-remove"></i>
@@ -100,6 +94,8 @@
 </template>
 
 <script>
+import vote from './Vote'
+
 export default {
   data () {
     return {
@@ -109,10 +105,10 @@ export default {
       content: '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
     }
   },
+  components: {
+    vote
+  },
   methods: {
-    addVote: function () {
-      this.vote += 1
-    },
     mouseOver: function () {
       if (this.isShowAll) {
         this.active = true
