@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="home">
-    <navbar></navbar>
+    <zhihunavbar></zhihunavbar>
     <div class="row main-body">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import navbar from './Navbar'
+import zhihunavbar from '../commons/ZhihuNavbar'
 import homeEntry from './HomeEntry'
-import contentSection from './Content'
+import contentSection from '../commons/Content'
 
 export default {
   data () {
     return {}
   },
   components: {
-    navbar,
+    zhihunavbar,
     homeEntry,
     contentSection
   }
