@@ -5,7 +5,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <home-entry></home-entry>
-        <content-section></content-section>
+        <content-section :isHome="isHome"></content-section>
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -19,7 +19,9 @@ import contentSection from '../commons/Content'
 
 export default {
   data () {
-    return {}
+    return {
+      isHome: true
+    }
   },
   components: {
     zhihunavbar,

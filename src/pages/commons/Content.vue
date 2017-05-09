@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="content">
-    <div class="content-header">
+    <div class="content-header" v-show="isHome">
       <span class="fa fa-list-alt pull-left">
         最新动态
       </span>
@@ -9,13 +9,11 @@
       </span>
     </div>
 
-    <br>
-
     <div class="content-section">
       <b-media>
         <div class="row">
           <div class="col-md-1" style="padding: 0px">
-            <div class="topic-avatar">
+            <div class="topic-avatar" v-show="isHome">
               <img class="avatar" slot="aside" src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
             </div>
 
@@ -24,7 +22,7 @@
 
           <div class="topic-header row col-md-11" style="padding: 0px">
             <div class="col-md-12" style="padding: 0px">
-              <div class="topic-from">
+              <div class="topic-from" v-show="isHome">
                 来自话题: IT 行业
                 <i class="pull-right fa fa-remove"></i>
               </div>
@@ -105,6 +103,7 @@ export default {
       content: '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
     }
   },
+  props: ['isHome'],
   components: {
     vote
   },
@@ -171,14 +170,22 @@ export default {
     padding-top: 7px;
   }
   .content-header {
-    padding-top: 30px;
+    overflow: hidden;
+    padding: 30px 0 10px 0;
+    border-bottom: 1px solid #ccc;
   }
-
+  .content-header .pull-left {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+  }
+  .content-header .pull-right {
+    font-weight: 400;
+    color: #999;
+  }
   .content-section {
-    border-top: 1px solid #ccc;
     padding-top: 10px;
   }
-
   .topic-title {
     font-size: 14px;
     padding-top: 7px;

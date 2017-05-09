@@ -5,7 +5,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <like-topic></like-topic>
-        <content-section></content-section>
+        <content-section :isHome="isHome"></content-section>
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -18,7 +18,9 @@ import contentSection from '../commons/Content'
 import likeTopic from './LikeTopic'
 export default {
   data () {
-    return {}
+    return {
+      isHome: false
+    }
   },
   components: {
     zhihunavbar,
@@ -29,4 +31,13 @@ export default {
 </script>
 
 <style lang="css">
+  .topic-introduction {
+    overflow: hidden;
+  }
+  .item-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    border-radius: 4px;
+  }
 </style>

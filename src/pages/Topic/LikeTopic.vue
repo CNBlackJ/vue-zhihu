@@ -19,17 +19,22 @@
         <a class="topic-item-link" :href="'#/topic#' + item">{{item}}</a>
       </li>
     </ul>
+    <topic-introduction></topic-introduction>
   </div>
 </template>
 
 <script>
+import topicIntroduction from './TopicIntroduction'
 export default {
   name: 'like-topic',
   data () {
     return {
       isActive: 0,
-      topic_items: ['阅读', '生活', '摄影', '运动', '西部世界', 'Vue.js']
+      topic_items: ['阅读', '生活', '摄影', '运动', '西部世界', 'Vue.js', 'Python', 'Ruby on Rails', '体育', 'life style', 'Andriod', 'Apple', 'Iphone', 'Kindle']
     }
+  },
+  components: {
+    topicIntroduction
   },
   methods: {
     isChoose: function (index) {
@@ -40,8 +45,10 @@ export default {
 </script>
 
 <style lang="css">
-  .like-topic-head {
+  .row .like-topic-head {
     border-bottom: 1px solid #ccc;
+    margin-left: 0px;
+    margin-right: 0px;
     padding-bottom: 8px;
   }
   .like-topic-title {
@@ -59,6 +66,8 @@ export default {
   }
   .topic-items {
     padding: 18px 0 8px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
   }
   .topic-item {
     float: left;
