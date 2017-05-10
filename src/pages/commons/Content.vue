@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="content">
-    <div class="content-header" v-show="isHome">
+    <div class="content-header" v-if="isHome">
       <span class="fa fa-list-alt pull-left">
         最新动态
       </span>
@@ -13,7 +13,7 @@
       <b-media>
         <div class="row">
           <div class="col-md-1" style="padding: 0px">
-            <div class="topic-avatar" v-show="isHome">
+            <div class="topic-avatar" v-if="isHome">
               <img class="avatar" slot="aside" src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
             </div>
 
@@ -22,7 +22,7 @@
 
           <div class="topic-header row col-md-11" style="padding: 0px">
             <div class="col-md-12" style="padding: 0px">
-              <div class="topic-from" v-show="isHome">
+              <div class="topic-from" v-if="isHome">
                 来自话题: IT 行业
                 <i class="pull-right fa fa-remove"></i>
               </div>
