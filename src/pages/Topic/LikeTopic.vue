@@ -90,5 +90,10 @@ export default {
     background: #259;
     border-color: #259;
     color: #fff;
+    text-decoration: none;
+  }
+  li a:focus {
+    color: #fff;
+    text-decoration: none;
   }
 </style>

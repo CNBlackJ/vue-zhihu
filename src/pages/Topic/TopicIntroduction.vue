@@ -51,4 +51,7 @@ export default {
     color: #999;
     cursor: text;
   }
+  .pull-right a:hover {
+    text-decoration: none;
+  }
 </style>
