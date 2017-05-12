@@ -16,11 +16,11 @@
             </b-nav>
 
             <b-nav is-nav-bar>
-              <b-nav-item :active='true'>Home</b-nav-item>
-              <b-nav-item>Topic</b-nav-item>
-              <b-nav-item>Discover</b-nav-item>
+              <b-nav-item :active='true'>首页</b-nav-item>
+              <b-nav-item>话题</b-nav-item>
+              <b-nav-item>发现</b-nav-item>
               <b-nav-item>
-                Message
+                消息
                 <span class="badge">4</span>
               </b-nav-item>
             </b-nav>
@@ -28,7 +28,7 @@
             <b-nav is-nav-bar class="ml-auto">
 
               <b-nav-item>
-                Question
+                提问
               </b-nav-item>
 
               <b-nav-item-dropdown v-if=isLogin right-alignment>

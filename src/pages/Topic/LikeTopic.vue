@@ -86,13 +86,13 @@ export default {
     border-color: #259;
     color: #fff;
   }
-  li a:hover {
+  topic-items li a:hover {
     background: #259;
     border-color: #259;
     color: #fff;
     text-decoration: none;
   }
-  li a:focus {
+  topic-items li a:focus {
     color: #fff;
     text-decoration: none;
   }
