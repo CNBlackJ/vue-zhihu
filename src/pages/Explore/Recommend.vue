@@ -1,33 +1,29 @@
 <template lang="html">
-  <div class="recommend">
-    <div class="row">
-      <div class="col-md-12 recommend-header">
-        <div class="pull-left">
-          <i class="fa fa-list"></i>
-          <span class="recommend-title">
-            编辑推荐
+  <div class="recommend row">
+    <div class="col-md-12 recommend-header">
+      <div class="pull-left">
+        <i class="fa fa-list"></i>
+        <span class="recommend-title">
+          编辑推荐
+        </span>
+      </div>
+      <div class="pull-right">
+        <a href="#">
+          <span class="recommend-more">
+            更多推荐 »
           </span>
-        </div>
-        <div class="pull-right">
-          <a href="#">
-            <span class="recommend-more">
-              更多推荐 »
-            </span>
-          </a>
-        </div>
+        </a>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12 recommend-item" v-for="recommend in recommends">
-        <div class="pull-left">
-          <a href="#">
-            <span class="recommend-item-title">{{ recommend.title }}</span>
-          </a>
-        </div>
-        <div class="pull-right">
-          <span class="recommend-item-meta">{{ recommend.meta }}</span>
-        </div>
+    <div class="col-md-12 recommend-item" v-for="recommend in recommends">
+      <div class="pull-left">
+        <a href="#">
+          <span class="recommend-item-title">{{ recommend.title }}</span>
+        </a>
+      </div>
+      <div class="pull-right">
+        <span class="recommend-item-meta">{{ recommend.meta }}</span>
       </div>
     </div>
   </div>

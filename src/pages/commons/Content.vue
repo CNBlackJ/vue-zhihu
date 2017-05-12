@@ -33,9 +33,9 @@
                 匿名用户
               </div>
               <div class="topic-content">
-                <div v-on:mouseover="active=true" v-on:mouseout="mouseOver" class="topic-description">
+                <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
                   {{ content }}
-                  <a v-if="!isShowAll" v-on:click="showAll" v-bind:class="{ 'show-all-hover': active }">显示全部</a>
+                  <a v-if="!isShowAll" v-on:click="showAll" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
 
                   <div class="topic-meta">
                     <a href="#">
@@ -46,31 +46,31 @@
                       <i class="fa fa-comment-o fa-1"></i>
                       335条评论
                     </a>
-                    <a v-show="!active" href="#">
+                    <a v-show="!isActive" href="#">
                       <i class="">•</i>
                       禁止转载
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="fa fa-heart-o fa-1"></i>
                       感谢
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="fa fa-share-square fa-1"></i>
                       分享
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="fa fa-bookmark-o fa-1"></i>
                       收藏
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="">•</i>
                       没有帮助
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="">•</i>
                       举报
                     </a>
-                    <a v-show="active" href="#">
+                    <a v-show="isActive" href="#">
                       <i class="">•</i>
                       作者保留权利
                     </a>
@@ -97,7 +97,7 @@ import vote from './Vote'
 export default {
   data () {
     return {
-      active: false,
+      isActive: false,
       isShowAll: false,
       vote: 0,
       content: '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
@@ -110,9 +110,9 @@ export default {
   methods: {
     mouseOver: function () {
       if (this.isShowAll) {
-        this.active = true
+        this.isActive = true
       } else {
-        this.active = false
+        this.isActive = false
       }
     },
     showAll: function () {

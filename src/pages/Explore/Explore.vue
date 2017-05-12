@@ -5,6 +5,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <recommend></recommend>
+        <hot></hot>
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -14,13 +15,15 @@
 <script>
 import zhihunavbar from '../commons/ZhihuNavbar'
 import recommend from './Recommend'
+import hot from './Hot'
 export default {
   data () {
     return {}
   },
   components: {
     zhihunavbar,
-    recommend
+    recommend,
+    hot
   }
 }
 </script>
