@@ -16,9 +16,9 @@
             </b-nav>
 
             <b-nav is-nav-bar>
-              <b-nav-item :active='true'>首页</b-nav-item>
-              <b-nav-item>话题</b-nav-item>
-              <b-nav-item>发现</b-nav-item>
+              <b-nav-item :active='true' href="/#/home">首页</b-nav-item>
+              <b-nav-item href="/#/topic">话题</b-nav-item>
+              <b-nav-item href="/#/explore">发现</b-nav-item>
               <b-nav-item>
                 消息
                 <span class="badge">4</span>
