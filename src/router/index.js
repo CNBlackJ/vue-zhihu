@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
     },
     {
       path: '/login',
@@ -27,11 +27,6 @@ export default new Router({
       component: Logup
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
       path: '/topic',
       name: 'Topic',
       component: Topic
@@ -40,6 +35,11 @@ export default new Router({
       path: '/explore',
       name: 'Explore',
       component: Explore
+    },
+    {
+      path: '/hello',
+      name: 'Hello',
+      component: Hello
     }
   ]
 })

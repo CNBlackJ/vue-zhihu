@@ -34,7 +34,7 @@
               </div>
               <div class="topic-content">
                 <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
-                  {{ content }}
+                  <div v-html="content"></div>
                   <a v-if="!isShowAll" v-on:click="showAll" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
 
                   <div class="topic-meta">
@@ -93,6 +93,7 @@
 
 <script>
 import vote from './Vote'
+import axios from 'axios'
 
 export default {
   data () {
@@ -115,9 +116,10 @@ export default {
         this.isActive = false
       }
     },
-    showAll: function () {
-      this.content = '我生活在一个性教育普及很早的环境，不是从课本上，而是从……小黄片上（捂脸），我初中的时候，我们班青春期的躁动的小男生啊，可能作妖了啊，各种渠道找了n多小黄片，星状散步出去.本来也挺好的，青春期的孩子对性本来就应该有所了解的是不是？可是你们为什么要发给我？？？你们还记不记得我是个女的啊？？我还是个好奇心那么重的女的啊？？？我怎么可能不看呢！！！我还记得那天风和日丽，我爸出去斗地主，我妈出去打麻将，家里只剩我！只剩我！！！（仰天大笑）迅速打开电脑，播放.讲真，其实不怎么好看，但是好奇心驱使我一定要看到关键时刻！然后！我房门被打开了！！！我老娘回来了！！！'
+    showAll: async function () {
       this.isShowAll = true
+      const res = await axios.get('https://cnodejs.org/api/v1/topics?limit=1')
+      this.content = res.data.data[0].content
     },
     showDesc: function () {
       this.content = '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
