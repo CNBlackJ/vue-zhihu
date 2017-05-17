@@ -9,32 +9,34 @@
       </span>
     </div>
 
-    <div class="content-section">
-      <b-media>
+    <div v-for="(topic, index) in topics" class="content-section">
+      <b-media :id="index">
         <div class="row">
           <div class="col-md-1" style="padding: 0px">
             <div class="topic-avatar" v-if="isHome">
-              <img class="avatar" slot="aside" src="https://pic2.zhimg.com/c320496bb2fb33943a2c30ff4439b7bd_s.jpg" alt="">
+              <img class="avatar" slot="aside" :src="topic.author.avatar_url" alt="">
             </div>
 
-            <vote :isShowAll=isShowAll></vote>
+            <vote :isShowAll="isShowAll"></vote>
           </div>
 
           <div class="topic-header row col-md-11" style="padding: 0px">
             <div class="col-md-12" style="padding: 0px">
               <div class="topic-from" v-if="isHome">
-                来自话题: IT 行业
+                来自话题: {{ topic.tab }}
                 <i class="pull-right fa fa-remove"></i>
               </div>
               <div class="topic-title">
-                <a href="#">为什么想着更多的人用微信而不是QQ</a>
+                <a href="#">{{ topic.title }}</a>
               </div>
               <div class="user-name">
-                匿名用户
+                {{ topic.author.loginname }}
               </div>
               <div class="topic-content">
                 <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
-                  <div v-html="content"></div>
+
+                  <div class="markdown-content" v-html="isShowAll ? topic.content : rawContent"></div>
+
                   <a v-if="!isShowAll" v-on:click="showAll" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
 
                   <div class="topic-meta">
@@ -44,7 +46,7 @@
                     </a>
                     <a href="#">
                       <i class="fa fa-comment-o fa-1"></i>
-                      335条评论
+                      {{ topic.reply_count }}条评论
                     </a>
                     <a v-show="!isActive" href="#">
                       <i class="">•</i>
@@ -84,8 +86,6 @@
             </div>
           </div>
         </div>
-
-        <!-- [Optional: add media children here for nesting] -->
       </b-media>
     </div>
   </div>
@@ -101,14 +101,28 @@ export default {
       isActive: false,
       isShowAll: false,
       vote: 0,
-      content: '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
+      content: '',
+      rawContent: '',
+      topics: []
     }
   },
   props: ['isHome'],
   components: {
     vote
   },
+  created: async function () {
+    this.topics = await this.fetchTopics()
+    this.rawContent = this.shoRawContent()
+  },
   methods: {
+    fetchTopics: async function () {
+      const response = await axios.get('https://cnodejs.org/api/v1/topics?limit=10')
+      const topics = response.data.data
+      return topics
+    },
+    shoRawContent: function (topic) {
+      return 'I am a raw data of comtent'
+    },
     mouseOver: function () {
       if (this.isShowAll) {
         this.isActive = true
@@ -118,8 +132,8 @@ export default {
     },
     showAll: async function () {
       this.isShowAll = true
-      const res = await axios.get('https://cnodejs.org/api/v1/topics?limit=1')
-      this.content = res.data.data[0].content
+      // const res = await axios.get('https://cnodejs.org/api/v1/topics?limit=1')
+      // this.content = res.data.data[0].content
     },
     showDesc: function () {
       this.content = '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
@@ -191,5 +205,17 @@ export default {
   .topic-title {
     font-size: 14px;
     padding-top: 7px;
+  }
+  .markdown-content img {
+    width: 100%;
+  }
+  .markdown-text a {
+    color: #259;
+  }
+  .markdown-text ul {
+    display: block;
+  }
+  .markdown-text li {
+    display: list-item;
   }
 </style>
