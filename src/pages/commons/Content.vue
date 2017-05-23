@@ -17,7 +17,7 @@
               <img class="avatar" slot="aside" :src="topic.author.avatar_url" alt="">
             </div>
 
-            <vote :isShowAll="isShowAll"></vote>
+            <vote :isShowAll="showId === index && isShowAll"></vote>
           </div>
 
           <div class="topic-header row col-md-11" style="padding: 0px">
@@ -35,9 +35,10 @@
               <div class="topic-content">
                 <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
 
-                  <div class="markdown-content" v-html="isShowAll ? topic.content : rawContent"></div>
+                  <div v-show="showId === index && isShowAll" class="markdown-content" v-html="topic.content"></div>
+                  <div v-show="!(showId === index && isShowAll)" class="markdown-content" v-html="getRawContent(topic.content)"></div>
 
-                  <a v-if="!isShowAll" v-on:click="showAll" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
+                  <a v-if="!(showId === index && isShowAll)" v-on:click="showAll(index)" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
 
                   <div class="topic-meta">
                     <a href="#">
@@ -76,7 +77,7 @@
                       <i class="">•</i>
                       作者保留权利
                     </a>
-                    <a v-show="isShowAll" class="pull-right" v-on:click="showDesc">
+                    <a v-show="showId === index && isShowAll" class="pull-right" v-on:click="showLess">
                       <i class="fa fa-caret-up"></i>
                       收起
                     </a>
@@ -102,8 +103,8 @@ export default {
       isShowAll: false,
       vote: 0,
       content: '',
-      rawContent: '',
-      topics: []
+      topics: [],
+      showId: -1
     }
   },
   props: ['isHome'],
@@ -112,7 +113,6 @@ export default {
   },
   created: async function () {
     this.topics = await this.fetchTopics()
-    this.rawContent = this.shoRawContent()
   },
   methods: {
     fetchTopics: async function () {
@@ -120,8 +120,8 @@ export default {
       const topics = response.data.data
       return topics
     },
-    shoRawContent: function (topic) {
-      return 'I am a raw data of comtent'
+    getRawContent: function (content) {
+      return content.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
     mouseOver: function () {
       if (this.isShowAll) {
@@ -130,13 +130,13 @@ export default {
         this.isActive = false
       }
     },
-    showAll: async function () {
+    showAll: async function (id) {
+      this.showId = id
       this.isShowAll = true
       // const res = await axios.get('https://cnodejs.org/api/v1/topics?limit=1')
       // this.content = res.data.data[0].content
     },
-    showDesc: function () {
-      this.content = '太多人把微信当作一个神一样的产品了。 也有太多人把张小龙当作神了。 知乎不是一个崇尚独立思考的地方吗？ 它真的是那么好吗，还是说就是为了自我安慰“我用的应该是个好产品”而心里作祟在说“好”。 就我而言，我认为微信并没有什么突出的地方，并不是一…'
+    showLess: function () {
       this.isShowAll = false
     }
   }
