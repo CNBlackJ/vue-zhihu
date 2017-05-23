@@ -30,7 +30,7 @@
                 <a href="#">{{ topic.title }}</a>
               </div>
               <div class="user-name">
-                {{ topic.author.loginname }}
+                作者：<a href="">{{ topic.author.loginname }}</a>
               </div>
               <div class="topic-content">
                 <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
