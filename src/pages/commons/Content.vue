@@ -33,54 +33,60 @@
                 作者：<a href="">{{ topic.author.loginname }}</a>
               </div>
               <div class="topic-content">
-                <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver" class="topic-description">
+                <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver(index)" class="topic-description">
 
                   <div v-show="showId === index && isShowAll" class="markdown-content" v-html="topic.content"></div>
                   <div v-show="!(showId === index && isShowAll)" class="markdown-content" v-html="getRawContent(topic.content)"></div>
 
-                  <a v-if="!(showId === index && isShowAll)" v-on:click="showAll(index)" v-bind:class="{ 'show-all-hover': isActive }">显示全部</a>
+                  <a v-if="!(showId === index && isShowAll)" v-on:click="showAll(index)" v-bind:class="{ 'show-all-hover': isActive && index === hoverId }">显示全部</a>
 
-                  <div class="topic-meta">
-                    <a href="#">
-                      <i class="fa fa-plus fa-1"></i>
-                      关注问题
-                    </a>
-                    <a href="#">
-                      <i class="fa fa-comment-o fa-1"></i>
-                      {{ topic.reply_count }}条评论
-                    </a>
-                    <a v-show="!isActive" href="#">
-                      <i class="">•</i>
-                      禁止转载
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="fa fa-heart-o fa-1"></i>
-                      感谢
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="fa fa-share-square fa-1"></i>
-                      分享
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="fa fa-bookmark-o fa-1"></i>
-                      收藏
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="">•</i>
-                      没有帮助
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="">•</i>
-                      举报
-                    </a>
-                    <a v-show="isActive" href="#">
-                      <i class="">•</i>
-                      作者保留权利
-                    </a>
-                    <a v-show="showId === index && isShowAll" class="pull-right" v-on:click="showLess">
-                      <i class="fa fa-caret-up"></i>
-                      收起
-                    </a>
+                  <div class="topic-meta row">
+                    <div>
+                      <a href="#">
+                        <i class="fa fa-plus fa-1"></i>
+                        关注问题
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-comment-o fa-1"></i>
+                        {{ topic.reply_count }}条评论
+                      </a>
+                      <a v-show="!(isActive && index === hoverId)" href="#">
+                        <i class="">•</i>
+                        禁止转载
+                      </a>
+                    </div>
+                    <div v-show="isActive && index === hoverId">
+                      <a href="#">
+                        <i class="fa fa-heart-o fa-1"></i>
+                        感谢
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-share-square fa-1"></i>
+                        分享
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-bookmark-o fa-1"></i>
+                        收藏
+                      </a>
+                      <a href="#">
+                        <i class="">•</i>
+                        没有帮助
+                      </a>
+                      <a href="#">
+                        <i class="">•</i>
+                        举报
+                      </a>
+                      <a href="#">
+                        <i class="">•</i>
+                        作者保留权利
+                      </a>
+                    </div>
+                    <div class="pull-left">
+                      <a v-show="showId === index && isShowAll" class="pull-right" v-on:click="showLess">
+                        <i class="fa fa-caret-up"></i>
+                        收起
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -104,7 +110,8 @@ export default {
       vote: 0,
       content: '',
       topics: [],
-      showId: -1
+      showId: -1,
+      hoverId: -1
     }
   },
   props: ['isHome'],
@@ -123,18 +130,17 @@ export default {
     getRawContent: function (content) {
       return content.replace(/<[^>]+>/g, '').substr(0, 200) + '...'
     },
-    mouseOver: function () {
+    mouseOver: function (id) {
       if (this.isShowAll) {
         this.isActive = true
       } else {
+        this.hoverId = id
         this.isActive = false
       }
     },
     showAll: async function (id) {
       this.showId = id
       this.isShowAll = true
-      // const res = await axios.get('https://cnodejs.org/api/v1/topics?limit=1')
-      // this.content = res.data.data[0].content
     },
     showLess: function () {
       this.isShowAll = false
