@@ -90,6 +90,10 @@
                   </div>
                 </div>
               </div>
+              <div class="">
+                <comment>
+                </comment>
+              </div>
             </div>
           </div>
         </div>
@@ -101,6 +105,7 @@
 <script>
 import vote from './Vote'
 import axios from 'axios'
+import comment from '../../components/Comment'
 
 export default {
   data () {
@@ -116,7 +121,8 @@ export default {
   },
   props: ['isHome'],
   components: {
-    vote
+    vote,
+    comment
   },
   created: async function () {
     this.topics = await this.fetchTopics()
