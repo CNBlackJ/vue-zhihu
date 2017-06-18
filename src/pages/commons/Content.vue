@@ -166,6 +166,9 @@ export default {
     padding-right: 7px;
     color: #999;
   }
+  .topic-content {
+    width: 70%;
+  }
   .topic-description {
     padding-top: 7px;
   }

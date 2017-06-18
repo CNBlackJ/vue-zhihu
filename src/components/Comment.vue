@@ -1,15 +1,15 @@
 <template lang="html">
   <div id="comment">
     <div class="comment-panel">
-      <div class="row">
+      <div class="row" v-for="reply in replies">
         <div class="comment-avatar">
-          <img class="avatar" slot="aside" src="https://avatars0.githubusercontent.com/u/3118295?v=3&s=120" alt="">
+          <img class="avatar" slot="aside" :src="reply.author.avatar_url" alt="">
         </div>
         <div class="comment-detail">
           <a href="#">
-            关小民
+            {{ reply.author.loginname }}
           </a>
-          <p class="comment-content">这是多大仇</p>
+          <p class="comment-content" v-html="reply.content"></p>
           <span class="bg-grey">12小时前</span>
           <a href="#" class="bg-grey">
             <i class="fa fa-reply fa-1"></i>
@@ -28,7 +28,7 @@
             举报
           </a>
           <span class="bg-grey">
-            792赞
+            {{ reply.ups.length }}赞
           </span>
         </div>
       </div>
@@ -37,11 +37,22 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   data () {
     return {
-      replies: [{id: '1'}, {id: '2'}]
+      replies: []
+    }
+  },
+  created: async function () {
+    this.replies = await this.fetchReplies()
+  },
+  methods: {
+    fetchReplies: async function () {
+      const response = await axios.get('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312')
+      const replies = response.data.data.replies
+      return replies
     }
   }
 }
@@ -53,6 +64,7 @@ export default {
     padding-right: 8px;
   }
   .comment-panel {
+    width: 70%;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
