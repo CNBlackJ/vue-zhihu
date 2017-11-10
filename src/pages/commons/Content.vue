@@ -40,13 +40,13 @@
 
                   <a v-if="!(showId === index && isShowAll)" v-on:click="showAll(index)" v-bind:class="{ 'show-all-hover': isActive && index === hoverId }">显示全部</a>
 
-                  <div class="topic-meta row">
+                  <div class="topic-meta">
                     <div>
                       <a href="#">
                         <i class="fa fa-plus fa-1"></i>
                         关注问题
                       </a>
-                      <a href="#">
+                      <a href="#" v-on:click="showComment(index)">
                         <i class="fa fa-comment-o fa-1"></i>
                         {{ topic.reply_count }}条评论
                       </a>
@@ -54,29 +54,27 @@
                         <i class="">•</i>
                         禁止转载
                       </a>
-                    </div>
-                    <div v-show="isActive && index === hoverId">
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="fa fa-heart-o fa-1"></i>
                         感谢
                       </a>
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="fa fa-share-square fa-1"></i>
                         分享
                       </a>
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="fa fa-bookmark-o fa-1"></i>
                         收藏
                       </a>
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="">•</i>
                         没有帮助
                       </a>
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="">•</i>
                         举报
                       </a>
-                      <a href="#">
+                      <a href="#" v-show="isActive && index === hoverId">
                         <i class="">•</i>
                         作者保留权利
                       </a>
@@ -91,7 +89,7 @@
                 </div>
               </div>
               <div class="">
-                <comment>
+                <comment :commentCount="topic.reply_count" :postId="topic.id" v-if="index === showCommentId">
                 </comment>
               </div>
             </div>
@@ -116,7 +114,8 @@ export default {
       content: '',
       topics: [],
       showId: -1,
-      hoverId: -1
+      hoverId: -1,
+      showCommentId: -1
     }
   },
   props: ['isHome'],
@@ -150,6 +149,9 @@ export default {
     },
     showLess: function () {
       this.isShowAll = false
+    },
+    showComment: function (index) {
+      this.showCommentId = this.showCommentId === -1 ? index : -1
     }
   }
 }
@@ -166,9 +168,9 @@ export default {
     padding-right: 7px;
     color: #999;
   }
-  .topic-content {
+  /* .topic-content {
     width: 70%;
-  }
+  } */
   .topic-description {
     padding-top: 7px;
   }
