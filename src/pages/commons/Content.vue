@@ -21,10 +21,10 @@
           </div>
 
           <div class="topic-header row col-md-11" style="padding: 0px">
-            <div class="col-md-12" style="padding: 0px">
+            <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver(index)" class="col-md-12" style="padding: 0px">
               <div class="topic-from" v-if="isHome">
                 来自话题: {{ topic.tab }}
-                <i class="pull-right fa fa-remove"></i>
+                <i class="pull-right fa fa-remove" v-show="isActive && index === hoverId"></i>
               </div>
               <div class="topic-title">
                 <a href="#">{{ topic.title }}</a>
@@ -33,7 +33,7 @@
                 作者：<a href="">{{ topic.author.loginname }}</a>
               </div>
               <div class="topic-content">
-                <div v-on:mouseover="isActive=true" v-on:mouseout="mouseOver(index)" class="topic-description">
+                <div class="topic-description">
 
                   <div v-show="showId === index && isShowAll" class="markdown-content" v-html="topic.content"></div>
                   <div v-show="!(showId === index && isShowAll)" class="markdown-content" v-html="getRawContent(topic.content)"></div>
@@ -79,10 +79,9 @@
                         作者保留权利
                       </a>
                     </div>
-                    <div class="pull-left">
+                    <div class="pull-right">
                       <a v-show="showId === index && isShowAll" class="pull-right" v-on:click="showLess">
-                        <i class="fa fa-caret-up"></i>
-                        收起
+                        <i class="fa fa-caret-up"></i>收起
                       </a>
                     </div>
                   </div>
